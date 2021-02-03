@@ -2,7 +2,15 @@
 
 class Car {
 
-      /*
+    constructor({ speed = 0, price, maxSpeed, isOn = false, distance = 0 }) {
+        this.speed = speed;
+        this._price = price;   
+        this.maxSpeed = maxSpeed;
+        this.isOn = isOn;
+        this.distance = distance;
+    }
+
+          /*
    * Конструктор получает объект настроек.
    *
    * Добавь свойства будущеего экземпляра класса:
@@ -12,13 +20,7 @@ class Car {
    *  isOn - заведен ли автомобиль, значения true или false. Изначально false
    *  distance - общий киллометраж, изначально 0
    */
-    constructor({ speed = 0, price, maxSpeed, isOn, distance = 0 }) {
-        this.speed = speed;
-        this._price = price;   
-        this.maxSpeed = maxSpeed;
-        this.isOn = isOn;
-        this.distance = distance;
-    }
+    
     
       /*
    * Добавь статический метод `getSpecs(car)`,
@@ -65,23 +67,32 @@ class Car {
    * при условии что результирующая скорость
    * не больше чем значение свойства maxSpeed
    */
+
+    
     accelerate(value) {
-        if (this.speed <= this.maxSpeed) {
+          const currSpeed = this.speed + value;
+          if(currSpeed <= this.maxSpeed){
             this.speed += value;
+          } else {
+            this.speed = this.maxSpeed;
         }
-        
-    //   this.speed = this.speed + value
-  }
+    }
 
   /*
    * Отнимает от свойства speed полученное значение,
    * при условии что результирующая скорость не меньше нуля
    */
+
+
     decelerate(value) {
-        if (this.speed > 0) {
-            this.speed = this.speed - value;
+          const currSpeed = this.speed - value;
+          if(currSpeed >= value){
+            this.speed -= value;
+          } else {
+            this.speed = 0;
         }
     }
+    
 
   /*
    * Добавляет в поле distance киллометраж (hours * speed),
@@ -112,3 +123,6 @@ Car.getSpecs(mustang);
 console.log(mustang.price); // 2000
 mustang.price = 4000;
 console.log(mustang.price); // 4000
+
+
+// @import "./utils/variables";
